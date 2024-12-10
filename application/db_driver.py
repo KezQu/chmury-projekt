@@ -1,5 +1,6 @@
 from neo4j import GraphDatabase as graph_db
-
+from manager import Manager
+from employee import Employee
 
 class Driver:
     def __init__(self):
@@ -15,26 +16,34 @@ class Driver:
         print('Connected to', self.driver.get_server_info().agent, 'at', self.driver.get_server_info(
         ).address)
 
-    def add_employee(self):
+    def add_employee(self, employee: Employee):
         print("Add employee")
         pass
 
-    def del_employee(self):
+    def del_employee(self, employee: Employee):
         print("Del employee")
         pass
 
-    def add_manager(self):
+    def add_manager(self, manager: Manager):
         print("Add manager")
         pass
 
-    def del_manager(self):
+    def del_manager(self, manager: Manager):
         print("Del manager")
         pass
 
-    def add_department(self):
+    def add_department(self, department):
         print("Add department")
         pass
 
-    def del_department(self):
+    def del_department(self, department):
         print("Del department")
+        pass
+
+    def add_team(self, team):
+        print("Add team")
+        pass
+
+    def del_team(self, team):
+        print("Del team")
         pass

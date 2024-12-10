@@ -1,11 +1,54 @@
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Firm Organisational Structure</title>
-</head>
-<body>
-    <h1>Hello World!</h1>
-    <h2>Welcome to FlaskApp!</h2>
-</body>
+{% block header %}
+<h2>Strona główna</h2>
+{% endblock %}
+
+
+{% block content %}
+<form action="/lookup">
+  <input type="submit" value="podgląd struktury firmy">
+</form>
+<form action="/add_employee">
+  <input type="submit" value="dodaj pracownika">
+</form>
+<form action="/edit_employee">
+  <select name="edit_emp_select">
+    <option value="" disabled selected>wybierz pracownika do edycji</option>
+    {% for employee in employee_list %}
+      <option value="{{employee.id}}">{{employee.id}} {{employee.name}} {{employee.surname}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="edytuj pracownika">
+</form>
+<form action="/del_employee">
+  <input type="submit" value="usuń pracownika">
+</form>
+<form action="/add_manager">
+  <input type="submit" value="dodaj menadżera">
+</form>
+<form action="/edit_manager">
+  <select name="edit_man_select">
+    <option value="" disabled selected>wybierz manadżera do edycji</option>
+    {% for manager in manager_list %}
+      <option value="{{manager.id}}">{{manager.id}} {{manager.name}} {{manager.surname}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="edytuj menadżera">
+</form>
+<form action="/del_manager">
+  <input type="submit" value="usuń menadżera">
+</form>
+<form action="/add_department">
+  <input type="submit" value="dodaj oddział">
+</form>
+<form action="/del_department">
+  <input type="submit" value="usuń oddział">
+</form>
+<form action="/add_team">
+  <input type="submit" value="dodaj zespół">
+</form>
+<form action="/del_team">
+  <input type="submit" value="usuń zespół">
+</form>
+{% endblock %}

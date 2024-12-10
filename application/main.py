@@ -6,4 +6,4 @@ from application import DB_HANDLE
 
 if __name__ == '__main__':
     DB_HANDLE.connect_to_database()
-    APP.run(host='127.0.0.1', port=2137)
+    APP.run(host='0.0.0.0', port=2137, debug=True)

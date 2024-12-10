@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h2>Usuń menadżera</h2>
+{% endblock %}
+
+
+{% block content %}
+<form action="/del_employee_submit" method="post">
+  <select name="man_to_del_select" required><br>
+    <option value="" disabled selected>wybierz manadżera do zwolnienia</option>
+    {% for manager in manager_list %}
+      <option value="{{manager.id}}">{{manager.id}} {{manager.name}} {{manager.surname}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="zatwierdź zwolnienie">
+</form>
+<form action="/">
+  <input type="submit" value="strona główna">
+</form>
+{% endblock %}

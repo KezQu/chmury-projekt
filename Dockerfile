@@ -17,9 +17,10 @@ WORKDIR /application
 COPY ./application /application
 COPY ./requirements.txt /application
 
-EXPOSE 2137 7474 7687
+EXPOSE 7474 7687 
+# 2137
 
-RUN chmod 755 ./main.py
 RUN pip install -r requirements.txt
+RUN chmod 755 ./main.py
 
 # ENTRYPOINT [ "/application/main.py" ]

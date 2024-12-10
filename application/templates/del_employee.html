@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h2>Usuń pracownika</h2>
+{% endblock %}
+
+
+{% block content %}
+<form action="/del_employee_submit" method="post">
+  <select name="emp_to_del_select" required><br>
+    <option value="" disabled selected>wybierz pracownika do zwolnienia</option>
+    {% for employee in employee_list %}
+      <option value="{{employee.id}}">{{employee.id}} {{employee.name}} {{employee.surname}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="zatwierdź zwolnienie">
+</form>
+<form action="/">
+  <input type="submit" value="strona główna">
+</form>
+{% endblock %}
