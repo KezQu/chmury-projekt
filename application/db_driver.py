@@ -3,7 +3,7 @@ from neo4j import GraphDatabase as graph_db
 
 class Driver:
     def __init__(self):
-        self.URL = "neo4j://127.0.0.1"
+        self.URL = "neo4j://localhost:7687"
         self.CREDENTIALS = ("neo4j", "your_secure_password")
 
     def __del__(self):

@@ -14,6 +14,7 @@ if [[ $(docker ps -a | grep chmury-neo4j) ]];
 	else
 		docker run -d \
 			--name chmury-neo4j-container \
+			-p 5000:5000 \
 			-p 7474:7474 \
 			-p 7687:7687 \
 			chmury-neo4j
