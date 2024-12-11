@@ -21,10 +21,11 @@ class Driver:
         self.driver.execute_query(query, id=id, database_="neo4j")
 
     def param_query(self, query: str, params: dict):
-        print(query)
-        print(params)
+        print("REQUEST: ", query)
+        print("REQUEST: ", params)
         results, summary, keys = self.driver.execute_query(
             query, parameters_=params, database_="neo4j")
+        print("RESULT: ", results)
         return results
 
     def add_employee(self, employee: Employee):
@@ -64,22 +65,10 @@ class Driver:
         return self.param_query(get_all_q, None)
 
     def edit_employee(self, employee: Employee):
-        print(employee)
-        edit_q = """MATCH (e:Employee {id: $id}) 
-                    SET e.name = $name, 
-                        e.surname = $surname, 
-                        e.experience = $experience, 
-                        e.contract_type = $contract_type, 
-                        e.team_name = $team_name"""
-        return self.param_query(edit_q, employee.to_dict())
+        return self.param_query(*employee.query_edit())
 
     def edit_manager(self, manager: Manager):
-        edit_q = """MATCH (m:Manager {id: $id}) 
-                    SET m.name = $name, 
-                    m.surname = $surname, 
-                    m.experience = $experience, 
-                    m.team_name = $team_name"""
-        return self.param_query(edit_q, manager.to_dict())
+        return self.param_query(*manager.query_edit())
 
     def del_employee(self, employee_id):
         del_q = """MATCH (e:Employee {id: $id}) DETACH DELETE e"""
@@ -96,3 +85,31 @@ class Driver:
     def del_team(self, team_id, transfer_team_id):
         del_q = """MATCH (t:Team {id: $id}) DETACH DELETE t"""
         self.delete(del_q, team_id)
+
+    def get_employee_all_list(self):
+        query_result = self.get_employee_all()
+        res_list = []
+        for record in query_result:
+            res_list.append(Employee().from_record(record.get('e')))
+        return res_list
+
+    def get_manager_all_list(self):
+        query_result = self.get_manager_all()
+        res_list = []
+        for record in query_result:
+            res_list.append(Manager().from_record(record.get('m')))
+        return res_list
+
+    def get_dep_all_list(self):
+        query_result = self.get_department_all()
+        res_list = []
+        for record in query_result:
+            res_list.append(Department().from_record(record.get('d')))
+        return res_list
+
+    def get_team_all_list(self):
+        query_result = self.get_team_all()
+        res_list = []
+        for record in query_result:
+            res_list.append(Team().from_record(record.get('t')))
+        return res_list

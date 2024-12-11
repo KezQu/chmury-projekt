@@ -8,15 +8,8 @@ APP = Flask(__name__)
 
 @APP.route('/')
 def index():
-    employee_query_result = DB_HANDLE.get_employee_all()
-    employee_list = []
-    for record in employee_query_result:
-        employee_list.append(Employee().from_record(record.get('e')))
-    manager_query_result = DB_HANDLE.get_manager_all()
-    manager_list = []
-    for record in manager_query_result:
-        manager_list.append(Manager().from_record(record.get('m')))
-
+    manager_list = DB_HANDLE.get_manager_all_list()
+    employee_list = DB_HANDLE.get_employee_all_list()
     return render_template('index.html', manager_list=manager_list, employee_list=employee_list)
 
 
@@ -32,7 +25,8 @@ def add_employee():
         DB_HANDLE.add_employee(new_employee)
         return redirect('/')
 
-    return render_template('add_employee.html')
+    team_list = DB_HANDLE.get_team_all_list()
+    return render_template('add_employee.html', team_list=team_list)
 
 
 @APP.route('/employee/del', methods=['GET', 'POST'])
@@ -42,7 +36,8 @@ def del_employee():
         DB_HANDLE.del_employee(e_id)
         return redirect('/')
 
-    return render_template('del_employee.html')
+    employee_list = DB_HANDLE.get_employee_all_list()
+    return render_template('del_employee.html', employee_list=employee_list)
 
 
 @APP.route('/employee/edit', methods=['GET', 'POST'])
@@ -60,7 +55,8 @@ def edit_employee():
         DB_HANDLE.edit_employee(new_employee)
         return redirect('/')
 
-    return render_template('edit_employee.html', e=employee)
+    team_list = DB_HANDLE.get_team_all_list()
+    return render_template('edit_employee.html', e=employee, team_list=team_list)
 
 
 @APP.route('/manager/add', methods=['GET', 'POST'])
@@ -69,7 +65,9 @@ def add_manager():
         new_manager = Manager().from_form(request.form)
         DB_HANDLE.add_manager(new_manager)
         return redirect('/')
-    return render_template('add_manager.html')
+
+    team_list = DB_HANDLE.get_team_all_list()
+    return render_template('add_manager.html', team_list=team_list)
 
 
 @APP.route('/manager/del', methods=['GET', 'POST'])
@@ -79,24 +77,27 @@ def del_manager():
         DB_HANDLE.del_manager(m_id)
         return redirect('/')
 
-    return render_template('del_manager.html')
+    manager_list = DB_HANDLE.get_manager_all_list()
+    return render_template('del_manager.html', manager_list=manager_list)
 
 
 @APP.route('/manager/edit', methods=['GET', 'POST'])
 def edit_manager():
     manager = None
     if request.method == 'GET':
-        man_id = request.form.get('manager_id')
-        if man_id == None:
+        emp_id = request.args.get('manager_id')
+        if emp_id == None:
             return redirect('/')
-        manager = DB_HANDLE.get_manager(man_id)
+        manager = Manager().from_record(
+            DB_HANDLE.get_manager(emp_id)[0].get('m'))
 
     if request.method == 'POST':
         new_manager = Manager().from_form(request.form)
         DB_HANDLE.edit_manager(new_manager)
         return redirect('/')
 
-    return render_template('edit_manager.html')
+    team_list = DB_HANDLE.get_team_all_list()
+    return render_template('edit_manager.html', m=manager, team_list=team_list)
 
 
 @APP.route('/department/add', methods=['GET', 'POST'])
@@ -116,7 +117,8 @@ def del_department():
         DB_HANDLE.del_department(d_id, transter_d_id)
         return redirect('/')
 
-    return render_template('del_department.html')
+    dep_list = DB_HANDLE.get_dep_all_list()
+    return render_template('del_department.html', dep_list=dep_list)
 
 
 @APP.route('/team/add', methods=['GET', 'POST'])
@@ -125,7 +127,9 @@ def add_team():
         new_team = Team().from_form(request.form)
         DB_HANDLE.add_team(new_team)
         return redirect('/')
-    return render_template('add_team.html')
+
+    dep_list = DB_HANDLE.get_dep_all_list()
+    return render_template('add_team.html', dep_list=dep_list)
 
 
 @APP.route('/team/del', methods=['GET', 'POST'])
@@ -136,4 +140,5 @@ def del_team():
         DB_HANDLE.del_team(t_id, transter_t_id)
         return redirect('/')
 
-    return render_template('del_team.html')
+    team_list = DB_HANDLE.get_team_all_list()
+    return render_template('del_team.html', team_list=team_list)

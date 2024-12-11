@@ -17,10 +17,10 @@
     <option value="Umowa o dzieło">Umowa o dzieło</option>
     <option value="Samozatrudnienie">Samozatrudnienie</option>
   </select><br>
-  <select name="team_name">
-    <option value="none" selected>wybierz zespół</option>
+  <select name="team_id">
+    <option value="None" selected>wybierz zespół</option>
     {% for team in team_list %}
-      <option value="{{team.id}}">{{team.id}} {{team.name}}</option>
+      <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
     {% endfor %}  </select><br>
   <input type="submit" value="zatwierdź">
 </form>

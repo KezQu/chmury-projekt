@@ -9,13 +9,13 @@
 <form action="/department/del" method="post">
   <select name="department_id" required><br>
     <option value="" disabled selected>wybierz oddział do usunięcia</option>
-    {% for dep in department_list %}
+    {% for dep in dep_list %}
       <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
     {% endfor %}
   </select>
   <select name="transfer_department_id"><br>
-    <option value="none" selected>wybierz oddział do tranferu pracowników</option>
-    {% for dep in department_list %}
+    <option value="None" selected>wybierz oddział do tranferu zespołów</option>
+    {% for dep in dep_list %}
       <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
     {% endfor %}
   </select>

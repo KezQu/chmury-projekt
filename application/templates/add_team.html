@@ -9,6 +9,11 @@
 <form action="/team/add" method="post">
   <input type="text" id="name" name="name"  placeholder="Nazwa" required><br>
   <input type="text" id="duties" name="duties" placeholder="obowiązki zespołu" required><br>
+  <select name="dep_id" required>
+    <option value="None" disabled selected>wybierz oddział do którego ma należeć zespół</option>
+    {% for dep in dep_list %}
+    <option value="{{dep.id}}">{{dep.id}}: {{dep.name}}</option>
+    {% endfor %}  </select><br>
   <input type="submit" value="zatwierdź">
 </form>
 <form action="/">
