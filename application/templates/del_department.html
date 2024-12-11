@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h2>Usuń oddział</h2>
+{% endblock %}
+
+
+{% block content %}
+<form action="/department/del" method="post">
+  <select name="department_id" required><br>
+    <option value="" disabled selected>wybierz oddział do usunięcia</option>
+    {% for dep in department_list %}
+      <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
+    {% endfor %}
+  </select>
+  <select name="transfer_department_id"><br>
+    <option value="none" selected>wybierz oddział do tranferu pracowników</option>
+    {% for dep in department_list %}
+      <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="zatwierdź usunięcie">
+</form>
+<form action="/">
+  <input type="submit" value="strona główna">
+</form>
+{% endblock %}

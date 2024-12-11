@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h2>Dodaj pracownika</h2>
+<h2>Dodaj zespół</h2>
 {% endblock %}
 
 
 {% block content %}
-<form action="/add_team_submit" method="post">
-  <input type="text" id="name" name="name"  placeholder="Imię" required><br>
+<form action="/team/add" method="post">
+  <input type="text" id="name" name="name"  placeholder="Nazwa" required><br>
   <input type="text" id="duties" name="duties" placeholder="obowiązki zespołu" required><br>
   <input type="submit" value="zatwierdź">
 </form>

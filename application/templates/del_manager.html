@@ -6,9 +6,9 @@
 
 
 {% block content %}
-<form action="/del_employee_submit" method="post">
-  <select name="man_to_del_select" required><br>
-    <option value="" disabled selected>wybierz manadżera do zwolnienia</option>
+<form action="/manager/del" method="post">
+  <select name="manager_id" required><br>
+    <option value="" disabled selected>wybierz menażera do zwolnienia</option>
     {% for manager in manager_list %}
       <option value="{{manager.id}}">{{manager.id}} {{manager.name}} {{manager.surname}}</option>
     {% endfor %}

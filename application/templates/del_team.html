@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h2>Usuń zespół</h2>
+{% endblock %}
+
+
+{% block content %}
+<form action="/team/del" method="post">
+  <select name="team_id" required><br>
+    <option value="" disabled selected>wybierz zespół do usunięcia</option>
+    {% for team in team_list %}
+      <option value="{{team.id}}">{{team.id}} {{team.name}}</option>
+    {% endfor %}
+  </select>
+  <select name="transfer_team_id"><br>
+    <option value="none" selected>wybierz zespół do tranferu pracowników</option>
+    {% for team in team_list %}
+      <option value="{{team.id}}">{{team.id}} {{team.name}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="zatwierdź usunięcie">
+</form>
+<form action="/">
+  <input type="submit" value="strona główna">
+</form>
+{% endblock %}

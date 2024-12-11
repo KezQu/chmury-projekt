@@ -9,46 +9,46 @@
 <form action="/lookup">
   <input type="submit" value="podgląd struktury firmy">
 </form>
-<form action="/add_employee">
+<form action="/employee/add">
   <input type="submit" value="dodaj pracownika">
 </form>
-<form action="/edit_employee">
-  <select name="edit_emp_select">
+<form action="/employee/edit" method="get">
+  <select name="employee_id" required>
     <option value="" disabled selected>wybierz pracownika do edycji</option>
     {% for employee in employee_list %}
-      <option value="{{employee.id}}">{{employee.id}} {{employee.name}} {{employee.surname}}</option>
+      <option value="{{employee.id}}">{{employee.id}}: {{employee.name}} {{employee.surname}}</option>
     {% endfor %}
   </select>
   <input type="submit" value="edytuj pracownika">
 </form>
-<form action="/del_employee">
+<form action="/employee/del">
   <input type="submit" value="usuń pracownika">
 </form>
-<form action="/add_manager">
+<form action="/manager/add">
   <input type="submit" value="dodaj menadżera">
 </form>
-<form action="/edit_manager">
-  <select name="edit_man_select">
-    <option value="" disabled selected>wybierz manadżera do edycji</option>
+<form action="/manager/edit" method="get">
+  <select name="manager_id">
+    <option value="" disabled selected>wybierz menadżera do edycji</option>
     {% for manager in manager_list %}
-      <option value="{{manager.id}}">{{manager.id}} {{manager.name}} {{manager.surname}}</option>
+      <option value="{{manager.id}}">{{manager.id}}: {{manager.name}} {{manager.surname}}</option>
     {% endfor %}
   </select>
   <input type="submit" value="edytuj menadżera">
 </form>
-<form action="/del_manager">
+<form action="/manager/del">
   <input type="submit" value="usuń menadżera">
 </form>
-<form action="/add_department">
+<form action="/department/add">
   <input type="submit" value="dodaj oddział">
 </form>
-<form action="/del_department">
+<form action="/department/del">
   <input type="submit" value="usuń oddział">
 </form>
-<form action="/add_team">
+<form action="/team/add">
   <input type="submit" value="dodaj zespół">
 </form>
-<form action="/del_team">
+<form action="/team/del">
   <input type="submit" value="usuń zespół">
 </form>
 {% endblock %}

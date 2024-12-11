@@ -1,12 +1,51 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h2>Strona główna</h2>
+<h2>Szukaj</h2>
 {% endblock %}
 
 
 {% block content %}
+<form action="/lookup/result" method="GET">
+  <label>Filtry dotyczące pracowników</label><br>
+  <input type="text" id="e_name" name="e_name" placeholder="Imię">
+  <input type="text" id="e_surname" name="e_surname" placeholder="Nazwisko">
+  <input type="text" id="e_exp_start" name="e_exp_start" placeholder="Doświadczenie od % lat">
+  <input type="text" id="e_exp_end" name="e_exp_end" placeholder="Doświadczenie do % lat">
+  <select name="e_contract_type">
+    <option value="" disabled selected>Rodzaj umowy</option>
+    <option value="Umowa o pracę">Umowa o pracę</option>
+    <option value="Umowa zlecenie">Umowa zlecenie</option>
+    <option value="Umowa o dzieło">Umowa o dzieło</option>
+    <option value="Samozatrudnienie">Samozatrudnienie</option>
+  </select>
+  <input type="date" id="e_hire_date" value="e_hire_date">
+  <br>
+
+  <label>Filtry dotyczące menadżerów</label>
+  <br>
+  <input type="text" id="m_name" name="m_name" placeholder="Imię">
+  <input type="text" id="m_surname" name="m_surname" placeholder="Nazwisko">
+  <input type="text" id="m_exp_start" name="m_exp_start" placeholder="Doświadczenie od % lat">
+  <input type="text" id="m_exp_end" name="m_exp_end" placeholder="Doświadczenie do % lat">
+  <input type="date" id="m_hire_date" name="m_hire_date">
+  <br>
+  <label>Filtry dotyczące oddziałów</label>
+  <br>
+  <input type="text" id="d_name" name="d_name" placeholder="Nazwa">
+  <input type="text" id="d_responsibilities" name="d_responsibilities" placeholder="Zadania">
+  <br>
+  <label>Filtry dotyczące zespołów</label>
+  <br>
+  <input type="text" id="d_name" name="d_name" placeholder="Nazwa">
+  <input type="text" id="d_duties" name="d_duties" placeholder="Obowiązki">
+  <br>
+  <input type="submit" value="Szukaj">
+</form>
+
 <form action="/">
   <input type="submit" value="strona główna">
 </form>
+
+<iframe src="https://www.w3schools.com" title="W3Schools Free Online Web Tutorials" style="height: 600; width: 400;"></iframe>
 {% endblock %}
