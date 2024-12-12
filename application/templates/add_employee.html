@@ -17,7 +17,7 @@
     <option value="Umowa o dzieło">Umowa o dzieło</option>
     <option value="Samozatrudnienie">Samozatrudnienie</option>
   </select><br>
-  <select name="team_id">
+  <select name="works_in">
     <option value="None" selected>wybierz zespół</option>
     {% for team in team_list %}
       <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>

@@ -13,7 +13,7 @@
   <input type="text" id="surname" name="surname"  value="{{m.surname}}" required><br>
   <input type="text" id="experience" name="experience"  value="{{m.experience}}" required><br>
   <input type="hidden" id="hire_date" name="hire_date" value="{{m.hire_date}}">
- <select name="team_id">
+ <select name="manages">
     <option value="None"></option>
     <option value="Delete">Usuń z aktualnego zespołu</option>
    {% for team in team_list %}

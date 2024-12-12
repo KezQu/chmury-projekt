@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, request
-import db_driver
 from data_types import Manager, Employee, Team, Department
+import db_driver
+from pyvis.network import Network
+
 
 DB_HANDLE = db_driver.Driver()
 APP = Flask(__name__)
@@ -13,8 +15,22 @@ def index():
     return render_template('index.html', manager_list=manager_list, employee_list=employee_list)
 
 
-@APP.route('/lookup')
+@APP.route('/lookup', methods=['GET', 'POST'])
 def lookup():
+    nodes = []
+    edges = []
+    if request.method == 'GET':
+        nodes, edges = DB_HANDLE.get_all_list()
+    if request.method == 'POST':
+        pass
+    graph = Network(height=600, width=800)
+    for n in nodes:
+        graph.add_node(n.id, label=n.name, title=str(n))
+    for n1, n2, type in edges:
+        graph.add_edge(n1.id, n2.id, title=type)
+    # graph.barnes_hut()
+    print(graph)
+    graph.save_graph('./static/graph.html')
     return render_template('lookup.html')
 
 
@@ -52,6 +68,7 @@ def edit_employee():
 
     if request.method == 'POST':
         new_employee = Employee().from_form(request.form)
+        print(new_employee.to_dict())
         DB_HANDLE.edit_employee(new_employee)
         return redirect('/')
 
