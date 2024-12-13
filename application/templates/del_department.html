@@ -13,12 +13,6 @@
       <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
     {% endfor %}
   </select>
-  <select name="transfer_department_id"><br>
-    <option value="None" selected>wybierz oddział do tranferu zespołów</option>
-    {% for dep in dep_list %}
-      <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
-    {% endfor %}
-  </select>
   <input type="submit" value="zatwierdź usunięcie">
 </form>
 <form action="/">

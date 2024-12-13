@@ -123,6 +123,7 @@ celerybeat.pid
 
 # Environments
 .env
+neo4j_auth.txt
 .venv
 env/
 venv/

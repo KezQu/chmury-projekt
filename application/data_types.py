@@ -55,7 +55,7 @@ class Employee:
                 'surname': self.surname,
                 'experience': self.experience,
                 'contract_type': self.contract_type,
-                'hire_date': self.hire_date,
+                'hire_date': self.hire_date.replace(' ', 'T'),
                 'works_in': self.works_in}
 
     def query_add(self):
@@ -71,13 +71,11 @@ class Employee:
                         e.surname = $surname,
                         e.experience = $experience,
                         e.contract_type = $contract_type"""
-        if self.works_in is not None:
-            edge_edit_q = ''
-            if self.works_in == 'Delete':
-                edge_edit_q = " WITH $id AS emp_id MATCH (e:Employee {id: emp_id})-[r:WORKS_IN]->() DELETE r"
-            else:
-                edge_edit_q = " WITH $id AS emp_id MATCH (e:Employee {id: emp_id}) MATCH (t:Team {id: $works_in}) CREATE (e)-[:WORKS_IN]->(t)"
-            edit_q = edit_q + edge_edit_q
+        if self.works_in != "None":
+            edge_edit_q = ""
+            edge_edit_q = """ WITH $id AS emp_id MATCH (e:Employee {id: emp_id})-[r:WORKS_IN]->() DELETE r
+                              WITH $id AS emp_id MATCH (e:Employee {id: emp_id}) MATCH (t:Team {id: $works_in}) CREATE (e)-[:WORKS_IN]->(t)"""
+            edit_q += edge_edit_q
         return edit_q + " RETURN e", self.to_dict()
 
 
@@ -128,7 +126,7 @@ class Manager:
                 'name': self.name,
                 'surname': self.surname,
                 'experience': self.experience,
-                'hire_date': self.hire_date,
+                'hire_date': self.hire_date.replace(' ', 'T'),
                 'manages': self.manages}
 
     def query_add(self):
@@ -143,9 +141,11 @@ class Manager:
                     SET m.name = $name,
                     m.surname = $surname,
                     m.experience = $experience"""
-        if self.manages is not None:
-            edit_q = edit_q + \
-                " WITH $id AS man_id MATCH (m:Manager {id: man_id}) MATCH (t:Team {id: $manages}) CREATE (m)-[:MANAGES]->(t)"
+        if self.manages != "None":
+            edge_edit_q = ""
+            edge_edit_q = """ WITH $id AS man_id MATCH (m:Manager {id: man_id})-[r:MANAGES]->() DELETE r
+                              WITH $id AS man_id MATCH (m:Manager {id: man_id}) MATCH (t:Team {id: $manages}) CREATE (m)-[:MANAGES]->(t)"""
+            edit_q += edge_edit_q
         return edit_q + " RETURN m", self.to_dict()
 
 

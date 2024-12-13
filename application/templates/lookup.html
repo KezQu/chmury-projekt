@@ -6,12 +6,12 @@
 
 
 {% block content %}
-<form action="/lookup/result" method="GET">
+<form action="/lookup" method="GET">
   <label>Filtry dotyczące pracowników</label><br>
   <input type="text" id="e_name" name="e_name" placeholder="Imię">
   <input type="text" id="e_surname" name="e_surname" placeholder="Nazwisko">
-  <input type="text" id="e_exp_start" name="e_exp_start" placeholder="Doświadczenie od % lat">
-  <input type="text" id="e_exp_end" name="e_exp_end" placeholder="Doświadczenie do % lat">
+  <input type="number" id="e_exp_start" name="e_exp_start" placeholder="Doświadczenie od % lat">
+  <input type="number" id="e_exp_end" name="e_exp_end" placeholder="Doświadczenie do % lat">
   <select name="e_contract_type">
     <option value="" disabled selected>Rodzaj umowy</option>
     <option value="Umowa o pracę">Umowa o pracę</option>
@@ -26,8 +26,8 @@
   <br>
   <input type="text" id="m_name" name="m_name" placeholder="Imię">
   <input type="text" id="m_surname" name="m_surname" placeholder="Nazwisko">
-  <input type="text" id="m_exp_start" name="m_exp_start" placeholder="Doświadczenie od % lat">
-  <input type="text" id="m_exp_end" name="m_exp_end" placeholder="Doświadczenie do % lat">
+  <input type="number" id="m_exp_start" name="m_exp_start" placeholder="Doświadczenie od % lat">
+  <input type="number" id="m_exp_end" name="m_exp_end" placeholder="Doświadczenie do % lat">
   <input type="date" id="m_hire_date" name="m_hire_date">
   <br>
   <label>Filtry dotyczące oddziałów</label>

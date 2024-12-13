@@ -20,16 +20,13 @@ def lookup():
     nodes = []
     edges = []
     if request.method == 'GET':
-        nodes, edges = DB_HANDLE.get_all_list()
-    if request.method == 'POST':
-        pass
+        nodes, edges = DB_HANDLE.get_filtered_list(request.args)
+        # nodes, edges = DB_HANDLE.get_all_list()
     graph = Network(height=600, width=800)
     for n in nodes:
         graph.add_node(n.id, label=n.name, title=str(n))
     for n1, n2, type in edges:
         graph.add_edge(n1.id, n2.id, title=type)
-    # graph.barnes_hut()
-    print(graph)
     graph.save_graph('./static/graph.html')
     return render_template('lookup.html')
 
@@ -130,8 +127,7 @@ def add_department():
 def del_department():
     if request.method == 'POST':
         d_id = request.form['department_id']
-        transter_d_id = request.form['transfer_department_id']
-        DB_HANDLE.del_department(d_id, transter_d_id)
+        DB_HANDLE.del_department(d_id)
         return redirect('/')
 
     dep_list = DB_HANDLE.get_dep_all_list()
@@ -153,8 +149,7 @@ def add_team():
 def del_team():
     if request.method == 'POST':
         t_id = request.form['team_id']
-        transter_t_id = request.form['transfer_team_id']
-        DB_HANDLE.del_team(t_id, transter_t_id)
+        DB_HANDLE.del_team(t_id)
         return redirect('/')
 
     team_list = DB_HANDLE.get_team_all_list()

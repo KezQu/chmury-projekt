@@ -10,7 +10,7 @@
   <input type="hidden" id="id" name="id" value="{{e.id}}">
   <input type="text" id="name" name="name"  value="{{e.name}}" required><br>
   <input type="text" id="surname" name="surname"  value="{{e.surname}}" required><br>
-  <input type="text" id="experience" name="experience"  value="{{e.experience}}" required><br>
+  <input type="number" id="experience" name="experience"  value="{{e.experience}}" required><br>
   <input type="hidden" id="hire_date" name="hire_date" value="{{e.hire_date}}">
   <select name="contract_type" required>
     <option value="{{e.contract_type}}">{{e.contract_type}}</option>
@@ -20,8 +20,7 @@
     <option value="Samozatrudnienie">Samozatrudnienie</option>
   </select><br>
   <select name="works_in">
-    <option value="None">Wybierz zespół</option>
-    <option value="Delete">Usuń z aktualnego zespołu</option>
+    <option value="None">Przenieś do zespołu</option>
     {% for team in team_list %}
     <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
     {% endfor %}  </select><br>

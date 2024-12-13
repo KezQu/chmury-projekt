@@ -13,12 +13,6 @@
       <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
     {% endfor %}
   </select>
-  <select name="transfer_team_id"><br>
-    <option value="None" selected>wybierz zespół do tranferu pracowników</option>
-    {% for team in team_list %}
-      <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
-    {% endfor %}
-  </select>
   <input type="submit" value="zatwierdź usunięcie">
 </form>
 <form action="/">
