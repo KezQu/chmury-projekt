@@ -4,28 +4,28 @@
 <form action="/lookup" method="POST">
   <label>Filtry dotyczące pracowników</label><br />
   <input type="hidden" id="filter_type" name="filter_type" value="Employee" />
-  <input type="text" id="e_name" name="e_name" placeholder="Imię" />
-  <input type="text" id="e_surname" name="e_surname" placeholder="Nazwisko" />
+  <input type="text" id="name" name="name" placeholder="Imię" />
+  <input type="text" id="surname" name="surname" placeholder="Nazwisko" />
   <input
     type="number"
-    id="e_exp_start"
-    name="e_exp_start"
+    id="exp_start"
+    name="exp_start"
     placeholder="Doświadczenie od % lat"
   />
   <input
     type="number"
-    id="e_exp_end"
-    name="e_exp_end"
+    id="exp_end"
+    name="exp_end"
     placeholder="Doświadczenie do % lat"
   />
-  <select name="e_contract_type">
-    <option value="" disabled selected>Rodzaj umowy</option>
+  <select name="contract_type">
+    <option value="" selected>Rodzaj umowy</option>
     <option value="Umowa o pracę">Umowa o pracę</option>
     <option value="Umowa zlecenie">Umowa zlecenie</option>
     <option value="Umowa o dzieło">Umowa o dzieło</option>
     <option value="Samozatrudnienie">Samozatrudnienie</option>
   </select>
-  <input type="date" id="e_hire_date" name="e_hire_date" />
+  <input type="date" id="hirdate" name="hirdate" />
   <input type="submit" value="Szukaj" />
 </form>
 <br />
@@ -34,21 +34,21 @@
   <label>Filtry dotyczące menadżerów</label>
   <br />
   <input type="hidden" id="filter_type" name="filter_type" value="Manager" />
-  <input type="text" id="m_name" name="m_name" placeholder="Imię" />
-  <input type="text" id="m_surname" name="m_surname" placeholder="Nazwisko" />
+  <input type="text" id="name" name="name" placeholder="Imię" />
+  <input type="text" id="surname" name="surname" placeholder="Nazwisko" />
   <input
     type="number"
-    id="m_exp_start"
-    name="m_exp_start"
+    id="exp_start"
+    name="exp_start"
     placeholder="Doświadczenie od % lat"
   />
   <input
     type="number"
-    id="m_exp_end"
-    name="m_exp_end"
+    id="exp_end"
+    name="exp_end"
     placeholder="Doświadczenie do % lat"
   />
-  <input type="date" id="m_hire_date" name="m_hire_date" />
+  <input type="date" id="hirdate" name="hirdate" />
   <input type="submit" value="Szukaj" />
 </form>
 <br />
@@ -57,11 +57,11 @@
   <label>Filtry dotyczące oddziałów</label>
   <br />
   <input type="hidden" id="filter_type" name="filter_type" value="Department" />
-  <input type="text" id="d_name" name="d_name" placeholder="Nazwa" />
+  <input type="text" id="name" name="name" placeholder="Nazwa" />
   <input
     type="text"
-    id="d_responsibilities"
-    name="d_responsibilities"
+    id="responsibilities"
+    name="responsibilities"
     placeholder="Zadania"
   />
   <input type="submit" value="Szukaj" />
@@ -72,8 +72,8 @@
   <label>Filtry dotyczące zespołów</label>
   <br />
   <input type="hidden" id="filter_type" name="filter_type" value="Team" />
-  <input type="text" id="t_name" name="d_name" placeholder="Nazwa" />
-  <input type="text" id="t_duties" name="d_duties" placeholder="Obowiązki" />
+  <input type="text" id="name" name="name" placeholder="Nazwa" />
+  <input type="text" id="duties" name="duties" placeholder="Obowiązki" />
   <input type="submit" value="Szukaj" />
 </form>
 <br />

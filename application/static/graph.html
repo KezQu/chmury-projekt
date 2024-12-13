@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([]);
-                  edges = new vis.DataSet([]);
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "e_418cee16", "label": "Adam", "shape": "dot", "title": "Adam\nAbacki\n5\nSamozatrudnienie\n2024-12-13T18:37:42.076777"}, {"color": "#97c2fc", "id": "t_99aa861e", "label": "zesp\u00f3\u0142 A", "shape": "dot", "title": "zesp\u00f3\u0142 A\npraca"}, {"color": "#97c2fc", "id": "e_4de9be6f", "label": "Ewa", "shape": "dot", "title": "Ewa\nBabacka\n2\nUmowa o prac\u0119\n2024-12-13T18:38:56.045425"}]);
+                  edges = new vis.DataSet([{"from": "e_418cee16", "title": "WORKS_IN", "to": "t_99aa861e"}, {"from": "e_4de9be6f", "title": "WORKS_IN", "to": "t_99aa861e"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -119,6 +119,14 @@
         "hideNodesOnDrag": false
     },
     "physics": {
+        "barnesHut": {
+            "avoidOverlap": 1,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
         "enabled": true,
         "stabilization": {
             "enabled": true,

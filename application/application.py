@@ -19,8 +19,10 @@ def index():
 def lookup():
     nodes = []
     edges = []
+    template_to_render = ''
     if request.method == 'GET':
         nodes, edges = DB_HANDLE.get_all_list()
+        template_to_render = 'lookup.html'
     if request.method == 'POST':
         match request.form.get('filter_type'):
             case 'Employee':
@@ -35,13 +37,16 @@ def lookup():
             case 'Team':
                 nodes, edges = DB_HANDLE.get_filtered_teams_list(
                     request.form)
+        template_to_render = 'result.html'
     graph = Network(height=600, width=800)
     for n in nodes:
         graph.add_node(n.id, label=n.name, title=str(n))
     for n1, n2, type in edges:
         graph.add_edge(n1.id, n2.id, title=type)
+    graph.barnes_hut(gravity=-3000, overlap=1)
     graph.save_graph('./static/graph.html')
-    return render_template('lookup.html')
+    print(graph)
+    return render_template(template_to_render)
 
 
 @APP.route('/employee/add', methods=['GET', 'POST'])

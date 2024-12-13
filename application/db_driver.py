@@ -50,49 +50,90 @@ class Driver:
         q_result.extend(self.param_query(get_orphaned_q, None))
         return q_result
 
-    def get_filtered(self, form):
-        query_result = []
-        query_result.extend(self.param_query(*self.search_employees(form)))
-        # query_result.extend(self.param_query(self.search_managers(form)))
-        # query_result.extend(self.param_query(self.search_departments(form)))
-        # query_result.extend(self.param_query(self.search_teams(form)))
-        return query_result
-
-    def search_employees(self, form):
+    def get_filtered_employees(self, form):
         filter = ''
-        if form.get('e_name') is not None:
-            filter += f""" n1.name CONTAINS '{form.get('e_name')}' AND"""
-        if form.get('e_surname') is not None:
-            filter += f""" n1.surname CONTAINS '{
-                form.get('e_surname')}' AND"""
-        if form.get('e_exp_start') is not None and not form.get('e_exp_start') == "":
-            filter += f""" toInteger(n1.experience) >= {
-                form.get('e_exp_start')} AND"""
-        if form.get('e_exp_end') is not None and not form.get('e_exp_end') == "":
-            filter += f""" toInteger(n1.experience) <= {
-                form.get('e_exp_end')} AND"""
-        if form.get('e_contract_type') is not None:
-            filter += f""" n1.contract_type CONTAINS '{
-                form.get('e_contract_type')}' AND"""
-        if form.get('e_hire_date') is not None:
-            filter += f""" datetime(n1.hire_date) >= datetime('{
-                form.get('e_hire_date')}') AND"""
-        filter_query_part1 = f"""MATCH (n1:Employee) WHERE{filter}"""
-        filter_query_part2 = f"""OPTIONAL MATCH (n1:Employee)-[r:WORKS_IN]->(n2:Team) WHERE{
+        if form.get('name') is not None:
+            filter += f""" e.name CONTAINS '{form.get('name')}' AND"""
+        if form.get('surname') is not None:
+            filter += f""" e.surname CONTAINS '{
+                form.get('surname')}' AND"""
+        if form.get('exp_start') is not None and not form.get('exp_start') == "":
+            filter += f""" toInteger(e.experience) >= {
+                form.get('exp_start')} AND"""
+        if form.get('exp_end') is not None and not form.get('exp_end') == "":
+            filter += f""" toInteger(e.experience) <= {
+                form.get('exp_end')} AND"""
+        if form.get('contract_type') is not None:
+            filter += f""" e.contract_type CONTAINS '{
+                form.get('contract_type')}' AND"""
+        if form.get('hire_date') is not None:
+            filter += f""" datetime(e.hire_date) >= datetime('{
+                form.get('hire_date')}') AND"""
+        filter_query_part1 = f"""MATCH (e:Employee) WHERE{filter}"""
+        filter_query_part2 = f"""OPTIONAL MATCH (e:Employee)-[r:WORKS_IN]->(t:Team) WHERE{
             filter}"""
         final_query = filter_query_part1.rstrip(" WHERE").rstrip(
-            "AND") + filter_query_part2.rstrip(" WHERE").rstrip(" AND") + " RETURN n1, r, n2"
+            "AND") + filter_query_part2.rstrip(" WHERE").rstrip(" AND") + " RETURN e, r, t"
 
-        return final_query, None
+        query_result = self.param_query(final_query, None)
+        return query_result
 
-    def search_managers(self, form):
-        pass
+    def get_filtered_managers(self, form):
+        filter = ''
+        if form.get('name') is not None:
+            filter += f""" m.name CONTAINS '{form.get('name')}' AND"""
+        if form.get('surname') is not None:
+            filter += f""" m.surname CONTAINS '{
+                form.get('surname')}' AND"""
+        if form.get('exp_start') is not None and not form.get('exp_start') == "":
+            filter += f""" toInteger(m.experience) >= {
+                form.get('exp_start')} AND"""
+        if form.get('exp_end') is not None and not form.get('exp_end') == "":
+            filter += f""" toInteger(m.experience) <= {
+                form.get('exp_end')} AND"""
+        if form.get('hire_date') is not None:
+            filter += f""" datetime(m.hire_date) >= datetime('{
+                form.get('hire_date')}') AND"""
+        filter_query_part1 = f"""MATCH (m:Manager) WHERE{filter}"""
+        filter_query_part2 = f"""OPTIONAL MATCH (m:Manager)-[r:MANAGES]->(t:Team) WHERE{
+            filter}"""
+        final_query = filter_query_part1.rstrip(" WHERE").rstrip(
+            "AND") + filter_query_part2.rstrip(" WHERE").rstrip(" AND") + " RETURN m, r, t"
 
-    def search_departments(self, form):
-        pass
+        query_result = self.param_query(final_query, None)
+        return query_result
 
-    def search_teams(self, form):
-        pass
+    def get_filtered_departments(self, form):
+        filter = ''
+        if form.get('name') is not None:
+            filter += f""" d.name CONTAINS '{form.get('name')}' AND"""
+        if form.get('responsibilities') is not None:
+            filter += f""" d.responsibilities CONTAINS '{
+                form.get('responsibilities')}' AND"""
+        filter_query_part1 = f"""MATCH (d:Department) WHERE{filter}"""
+        filter_query_part2 = f"""OPTIONAL MATCH (d:Department)<-[r:IS_PART_OF]-(t:Team) WHERE{
+            filter}"""
+        final_query = filter_query_part1.rstrip(" WHERE").rstrip(
+            "AND") + filter_query_part2.rstrip(" WHERE").rstrip(" AND") + " RETURN d, r, t"
+
+        query_result = self.param_query(final_query, None)
+        return query_result
+
+    def get_filtered_teams(self, form):
+        filter = ''
+        if form.get('name') is not None:
+            filter += f""" t.name CONTAINS '{form.get('name')}' AND"""
+        if form.get('duties') is not None:
+            filter += f""" t.duties CONTAINS '{
+                form.get('duties')}' AND"""
+        filter_query_part1 = f"""MATCH (t:Team) WHERE{filter}"""
+        filter_query_part2 = f"""OPTIONAL MATCH (t:Team)-[r:IS_PART_OF]->(d:Department) WHERE{
+            filter}"""
+        final_query = filter_query_part1.rstrip(" WHERE").rstrip(
+            "AND") + filter_query_part2.rstrip(" WHERE").rstrip(" AND") + " RETURN t, r, d"
+
+        query_result = self.param_query(final_query, None)
+        return query_result
 
     def get_employee(self, employee_id):
         get_q = """MATCH (e:Employee {id: $id}) RETURN e"""
@@ -164,6 +205,23 @@ class Driver:
     def get_team_all_list(self):
         query_result = self.get_team_all()
         return self.nodes_to_list(query_result, 't')
+
+    def get_filtered_employees_list(self, form):
+        query_result = self.get_filtered_employees(form)
+        print(query_result)
+        return self.relations_to_list(query_result, ('e', 'r', 't'))
+
+    def get_filtered_managers_list(self, form):
+        query_result = self.get_filtered_managers(form)
+        return self.relations_to_list(query_result, ('m', 'r', 't'))
+
+    def get_filtered_departments_list(self, form):
+        query_result = self.get_filtered_departments(form)
+        return self.relations_to_list(query_result, ('d', 'r', 't'))
+
+    def get_filtered_teams_list(self, form):
+        query_result = self.get_filtered_teams(form)
+        return self.relations_to_list(query_result, ('t', 'r', 'd'))
 
     def nodes_to_list(self, query_result, node_mark: str):
         res_list = []
