@@ -1,27 +1,40 @@
-{% extends 'base.html' %}
-
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <h2>Dodaj pracownika</h2>
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 
 <form action="/manager/edit" method="post">
-  <input type="hidden" id="id" name="id" value="{{m.id}}">
-  <input type="text" id="name" name="name"  value="{{m.name}}" required><br>
-  <input type="text" id="surname" name="surname"  value="{{m.surname}}" required><br>
-  <input type="number" id="experience" name="experience"  value="{{m.experience}}" required><br>
-  <input type="hidden" id="hire_date" name="hire_date" value="{{m.hire_date}}">
- <select name="manages">
+  <input type="hidden" id="id" name="id" value="{{m.id}}" />
+  <input type="text" id="name" name="name" value="{{m.name}}" required /><br />
+  <input
+    type="text"
+    id="surname"
+    name="surname"
+    value="{{m.surname}}"
+    required
+  /><br />
+  <input
+    type="number"
+    id="experience"
+    name="experience"
+    value="{{m.experience}}"
+    required
+  /><br />
+  <input
+    type="hidden"
+    id="hire_date"
+    name="hire_date"
+    value="{{m.hire_date}}"
+  />
+  <select name="manages">
     <option value="None">Przenieś do zespołu</option>
-   {% for team in team_list %}
-   <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
-   {% endfor %}  </select><br>
-  <input type="submit" value="zatwierdź">
+    {% for team in team_list %}
+    <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
+    {% endfor %}</select
+  ><br />
+  <input type="submit" value="zatwierdź" />
 </form>
 <form action="/">
-  <input type="submit" value="strona główna">
+  <input type="submit" value="strona główna" />
 </form>
 
 {% endblock %}

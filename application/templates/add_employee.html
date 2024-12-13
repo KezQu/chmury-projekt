@@ -1,30 +1,38 @@
-{% extends 'base.html' %}
-
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <h2>Dodaj pracownika</h2>
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 <form action="/employee/add" method="post">
-  <input type="text" id="name" name="name"  placeholder="Imię" required><br>
-  <input type="text" id="surname" name="surname"  placeholder="Nazwisko" required><br>
-  <input type="number" id="experience" name="experience"  placeholder="Lata doświadczenia" required><br>
+  <input type="text" id="name" name="name" placeholder="Imię" required /><br />
+  <input
+    type="text"
+    id="surname"
+    name="surname"
+    placeholder="Nazwisko"
+    required
+  /><br />
+  <input
+    type="number"
+    id="experience"
+    name="experience"
+    placeholder="Lata doświadczenia"
+    required
+  /><br />
   <select name="contract_type" required>
     <option value="" disabled selected>wybierz rodzaj umowy</option>
     <option value="Umowa o pracę">Umowa o pracę</option>
     <option value="Umowa zlecenie">Umowa zlecenie</option>
     <option value="Umowa o dzieło">Umowa o dzieło</option>
-    <option value="Samozatrudnienie">Samozatrudnienie</option>
-  </select><br>
+    <option value="Samozatrudnienie">Samozatrudnienie</option></select
+  ><br />
   <select name="works_in">
     <option value="None" selected>wybierz zespół</option>
     {% for team in team_list %}
-      <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
-    {% endfor %}  </select><br>
-  <input type="submit" value="zatwierdź">
+    <option value="{{team.id}}">{{team.id}}: {{team.name}}</option>
+    {% endfor %}</select
+  ><br />
+  <input type="submit" value="zatwierdź" />
 </form>
 <form action="/">
-  <input type="submit" value="strona główna">
+  <input type="submit" value="strona główna" />
 </form>
 {% endblock %}

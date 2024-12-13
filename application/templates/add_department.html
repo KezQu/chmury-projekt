@@ -1,17 +1,18 @@
-{% extends 'base.html' %}
-
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <h2>Dodaj oddział</h2>
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 <form action="/department/add" method="post">
-  <input type="text" id="name" name="name"  placeholder="Nazwa" required><br>
-  <input type="text" id="responsibilities" name="responsibilities" placeholder="zadania oddziału" required><br>
-  <input type="submit" value="zatwierdź">
+  <input type="text" id="name" name="name" placeholder="Nazwa" required /><br />
+  <input
+    type="text"
+    id="responsibilities"
+    name="responsibilities"
+    placeholder="zadania oddziału"
+    required
+  /><br />
+  <input type="submit" value="zatwierdź" />
 </form>
 <form action="/">
-  <input type="submit" value="strona główna">
+  <input type="submit" value="strona główna" />
 </form>
 {% endblock %}

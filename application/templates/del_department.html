@@ -1,21 +1,17 @@
-{% extends 'base.html' %}
-
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <h2>Usuń oddział</h2>
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 <form action="/department/del" method="post">
-  <select name="department_id" required><br>
+  <select name="department_id" required>
+    <br />
     <option value="" disabled selected>wybierz oddział do usunięcia</option>
     {% for dep in dep_list %}
-      <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
+    <option value="{{dep.id}}">{{dep.id}} {{dep.name}}</option>
     {% endfor %}
   </select>
-  <input type="submit" value="zatwierdź usunięcie">
+  <input type="submit" value="zatwierdź usunięcie" />
 </form>
 <form action="/">
-  <input type="submit" value="strona główna">
+  <input type="submit" value="strona główna" />
 </form>
 {% endblock %}

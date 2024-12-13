@@ -1,21 +1,19 @@
-{% extends 'base.html' %}
-
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <h2>Usuń menadżera</h2>
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 <form action="/manager/del" method="post">
-  <select name="manager_id" required><br>
+  <select name="manager_id" required>
+    <br />
     <option value="" disabled selected>wybierz menażera do zwolnienia</option>
     {% for manager in manager_list %}
-      <option value="{{manager.id}}">{{manager.id}} {{manager.name}} {{manager.surname}}</option>
+    <option value="{{manager.id}}">
+      {{manager.id}} {{manager.name}} {{manager.surname}}
+    </option>
     {% endfor %}
   </select>
-  <input type="submit" value="zatwierdź zwolnienie">
+  <input type="submit" value="zatwierdź zwolnienie" />
 </form>
 <form action="/">
-  <input type="submit" value="strona główna">
+  <input type="submit" value="strona główna" />
 </form>
 {% endblock %}

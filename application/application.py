@@ -20,8 +20,21 @@ def lookup():
     nodes = []
     edges = []
     if request.method == 'GET':
-        nodes, edges = DB_HANDLE.get_filtered_list(request.args)
-        # nodes, edges = DB_HANDLE.get_all_list()
+        nodes, edges = DB_HANDLE.get_all_list()
+    if request.method == 'POST':
+        match request.form.get('filter_type'):
+            case 'Employee':
+                nodes, edges = DB_HANDLE.get_filtered_employees_list(
+                    request.form)
+            case 'Manager':
+                nodes, edges = DB_HANDLE.get_filtered_managers_list(
+                    request.form)
+            case 'Department':
+                nodes, edges = DB_HANDLE.get_filtered_departments_list(
+                    request.form)
+            case 'Team':
+                nodes, edges = DB_HANDLE.get_filtered_teams_list(
+                    request.form)
     graph = Network(height=600, width=800)
     for n in nodes:
         graph.add_node(n.id, label=n.name, title=str(n))

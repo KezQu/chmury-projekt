@@ -1,21 +1,19 @@
-{% extends 'base.html' %}
-
-{% block header %}
+{% extends 'base.html' %} {% block header %}
 <h2>Usuń pracownika</h2>
-{% endblock %}
-
-
-{% block content %}
+{% endblock %} {% block content %}
 <form action="/employee/del" method="post">
-  <select name="employee_id" required><br>
+  <select name="employee_id" required>
+    <br />
     <option value="" disabled selected>wybierz pracownika do zwolnienia</option>
     {% for employee in employee_list %}
-      <option value="{{employee.id}}">{{employee.id}} {{employee.name}} {{employee.surname}}</option>
+    <option value="{{employee.id}}">
+      {{employee.id}} {{employee.name}} {{employee.surname}}
+    </option>
     {% endfor %}
   </select>
-  <input type="submit" value="zatwierdź zwolnienie">
+  <input type="submit" value="zatwierdź zwolnienie" />
 </form>
 <form action="/">
-  <input type="submit" value="strona główna">
+  <input type="submit" value="strona główna" />
 </form>
 {% endblock %}

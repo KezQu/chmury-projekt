@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block header %}
+<h2>Wyniki wyszukiwania</h2>
+{% endblock %} {% block content %}
+
+<form action="/lookup">
+  <input type="submit" value="powrót" />
+</form>
+
+<h3>Podgląd bazy danych</h3>
+<br />
+<iframe
+  src="{{ url_for('static', filename='graph.html') }}"
+  height="610px"
+  width="805px"
+></iframe>
+{% endblock %}
