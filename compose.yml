@@ -1,13 +1,13 @@
 services:
-  # web:
-  #   build: ./application
-  #   ports:
-  #     - 2137:2137
+  web:
+    build: ./application
+    ports:
+      - 2137:2137
 
   neo4j:
     image: neo4j:5.26
     environment:
-        - NEO4J_AUTH_FILE=/run/secrets/neo4j_auth
+      - NEO4J_AUTH_FILE=/run/secrets/neo4j_auth
     ports:
       - 7474:7474
       - 7687:7687
