@@ -5,7 +5,7 @@ import os
 
 class Driver:
     def __init__(self):
-        self.URL = "neo4j://localhost:7687"
+        self.URL = "bolt://neo4j:7687"
         with open('neo4j_auth.txt', 'r') as auth:
             credentials = auth.readline().split('/')
             self.CREDENTIALS = (credentials[0], credentials[1])
@@ -183,11 +183,6 @@ class Driver:
 
     def get_all_list(self):
         query_result = self.get_all()
-        return self.relations_to_list(query_result, ('n1', 'r', 'n2'))
-
-    def get_filtered_list(self, form):
-        self.get_filtered(form)
-        query_result = self.get_filtered(form)
         return self.relations_to_list(query_result, ('n1', 'r', 'n2'))
 
     def get_employee_all_list(self):

@@ -1,9 +1,4 @@
 services:
-  web:
-    build: ./application
-    ports:
-      - 2137:2137
-
   neo4j:
     image: neo4j:5.26
     environment:
@@ -14,6 +9,13 @@ services:
     restart: always
     secrets:
       - neo4j_auth
+
+  web:
+    build: ./application
+    ports:
+      - 2137:2137
+    depends_on:
+      - neo4j
 
 secrets:
   neo4j_auth:
