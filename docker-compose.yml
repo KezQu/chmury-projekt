@@ -1,22 +1,10 @@
+version: "3.8"
 services:
-  neo4j:
-    image: neo4j:5.26
-    environment:
-      - NEO4J_AUTH_FILE=/run/secrets/neo4j_auth
-    ports:
-      - 7474:7474
-      - 7687:7687
-    restart: always
-    secrets:
-      - neo4j_auth
-
   web:
     build: ./application
     ports:
       - 2137:2137
     depends_on:
       - neo4j
-
-secrets:
-  neo4j_auth:
-    file: ./application/neo4j_auth.txt
+    networks:
+      - neo4j_network

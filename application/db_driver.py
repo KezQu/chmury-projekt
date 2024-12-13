@@ -5,7 +5,7 @@ import os
 
 class Driver:
     def __init__(self):
-        self.URL = "bolt://neo4j:7687"
+        self.URL = "neo4j+s://ca9fa5ba.databases.neo4j.io"
         with open('neo4j_auth.txt', 'r') as auth:
             credentials = auth.readline().split('/')
             self.CREDENTIALS = (credentials[0], credentials[1])
